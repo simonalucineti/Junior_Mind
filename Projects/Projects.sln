@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goats", "Goats\Goats.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimumArea", "MinimumArea\MinimumArea.csproj", "{88B55EED-F782-42E7-9427-EE783758782C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parquet", "Parquet\Parquet.csproj", "{6C04F36C-C28D-44D7-B175-283B2C0FC128}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{88B55EED-F782-42E7-9427-EE783758782C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88B55EED-F782-42E7-9427-EE783758782C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88B55EED-F782-42E7-9427-EE783758782C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C04F36C-C28D-44D7-B175-283B2C0FC128}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C04F36C-C28D-44D7-B175-283B2C0FC128}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C04F36C-C28D-44D7-B175-283B2C0FC128}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C04F36C-C28D-44D7-B175-283B2C0FC128}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
