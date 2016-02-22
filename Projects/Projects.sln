@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mushrooms", "Mushrooms\Mush
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goats", "Goats\Goats.csproj", "{87903792-E9D7-4200-985D-06E903169E7D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimumArea", "MinimumArea\MinimumArea.csproj", "{88B55EED-F782-42E7-9427-EE783758782C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{87903792-E9D7-4200-985D-06E903169E7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87903792-E9D7-4200-985D-06E903169E7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87903792-E9D7-4200-985D-06E903169E7D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88B55EED-F782-42E7-9427-EE783758782C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88B55EED-F782-42E7-9427-EE783758782C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88B55EED-F782-42E7-9427-EE783758782C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88B55EED-F782-42E7-9427-EE783758782C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
