@@ -16,13 +16,20 @@ namespace FizzBuzz
         {
             Assert.AreEqual("Buzz", IsDivisible(10));
         }
+        [TestMethod]
+        public void IsDivisibleByThreeAndFive()
+        {
+            Assert.AreEqual("FizzBuzz", IsDivisible(30));
+        }
         string IsDivisible(int number)
         {
             string output = "";
             if (number % 3 == 0)
                 output = "Fizz";
-            else if (number % 5 == 0)
+            if (number % 5 == 0)
                 output = "Buzz";
+            if ((number % 3 == 0) && (number % 5 == 0))
+                output = "FizzBuzz";
             return output;
         }
     }
