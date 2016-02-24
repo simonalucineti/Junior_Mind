@@ -11,6 +11,12 @@ namespace Melon
         {
             Assert.AreEqual("YES", HasAnEvenNumberOfKilos(12));
         }
+
+        [TestMethod]
+        public void AnOddNumberOfKilos()
+        {
+            Assert.AreEqual("NO", HasAnEvenNumberOfKilos(13));
+        }
         string HasAnEvenNumberOfKilos(int numberOfKilos)
         {
             string output = "";
