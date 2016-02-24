@@ -21,6 +21,11 @@ namespace FizzBuzz
         {
             Assert.AreEqual("FizzBuzz", IsDivisible(30));
         }
+        [TestMethod]
+        public void IsNotDivisible()
+        {
+            Assert.AreEqual("Not Divisible", IsDivisible(26));
+        }
         string IsDivisible(int number)
         {
             string output = "";
@@ -30,6 +35,7 @@ namespace FizzBuzz
                 output = "Buzz";
             if ((number % 3 == 0) && (number % 5 == 0))
                 output = "FizzBuzz";
+            else output = "Not Divisible";
             return output;
         }
     }
