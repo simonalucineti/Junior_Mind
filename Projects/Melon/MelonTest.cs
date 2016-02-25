@@ -9,18 +9,21 @@ namespace Melon
         [TestMethod]
         public void AnEvenNumberOfKilos()
         {
-            Assert.AreEqual("YES", HasAnEvenNumberOfKilos(12));
+            Assert.AreEqual("YES", HasAnEvenNumberOfKilos(20));
         }
 
         [TestMethod]
         public void AnOddNumberOfKilos()
         {
-            Assert.AreEqual("NO", HasAnEvenNumberOfKilos(13));
+            Assert.AreEqual("NO", HasAnEvenNumberOfKilos(15));
         }
         string HasAnEvenNumberOfKilos(int numberOfKilos)
         {
             string output = "";
-            output = numberOfKilos % 2 == 0 ? "YES" : "NO";
+            int halfPartOfMelon = numberOfKilos / 2;
+            if (numberOfKilos % 2 == 0)
+                output = halfPartOfMelon % 2 == 0 ? "YES" : "NO";
+            else output = "NO";
             return output;
         }
     }
