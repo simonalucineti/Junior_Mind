@@ -11,11 +11,17 @@ namespace ArabicToRoman
         {
             Assert.AreEqual("V", ConvertArabicToRoman(5));
         }
+        [TestMethod]
+        public void NumberIsLessThanAThousand()
+        {
+            Assert.AreEqual("XLIX", ConvertArabicToRoman(49));
+        }
         string ConvertArabicToRoman(int number)
         {
 
             string[] units = { "", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX" };
-            return units[number];
+            string[] tens = { "","X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC" };
+            return tens[number/10]+units[number%10];
         }
     }
 }
