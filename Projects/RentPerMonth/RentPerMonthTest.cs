@@ -11,10 +11,17 @@ namespace RentPerMonth
         {
             Assert.AreEqual(102, CalculateTotalAmountOfPayment(100,1));
         }
-       decimal CalculateTotalAmountOfPayment(int rentPerMonth, int lateDays)
+        [TestMethod]
+        public void AmountOfPaymentForAMediumPeriodOfDelay()
         {
-
-            decimal penalties = rentPerMonth * 2/100;
+            Assert.AreEqual(105, CalculateTotalAmountOfPayment(100, 11));
+        }
+        decimal CalculateTotalAmountOfPayment(int rentPerMonth, int lateDays)
+        {
+            var minimumPenalties = rentPerMonth * 2 / 100;
+            var mediumPenalties = rentPerMonth * 5 / 100;
+            var maximumPenalties = rentPerMonth * 10 / 100;
+            decimal penalties = lateDays > 10 ? mediumPenalties : minimumPenalties;
             return rentPerMonth + penalties;
         }
     }
