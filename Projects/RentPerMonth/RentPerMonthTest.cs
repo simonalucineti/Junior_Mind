@@ -21,8 +21,13 @@ namespace RentPerMonth
             var minimumPenalties = rentPerMonth * 2 / 100;
             var mediumPenalties = rentPerMonth * 5 / 100;
             var maximumPenalties = rentPerMonth * 10 / 100;
-            decimal penalties = lateDays > 10 ? mediumPenalties : minimumPenalties;
+            decimal penalties = IsAMediumPeriodOfDelay(lateDays) ? mediumPenalties : minimumPenalties;
             return rentPerMonth + penalties;
+        }
+
+        private static bool IsAMediumPeriodOfDelay(int lateDays)
+        {
+            return lateDays > 10;
         }
     }
 }
