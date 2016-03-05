@@ -10,7 +10,15 @@ namespace Panagram
         public void IsAPanagram()
         {
             string expected = "Is A Panagram" ;
-            string actual = DetermineIfIsAPanagram("The quick brown fox jumps over the lazy dog");
+            string actual = DetermineIfIsAPanagram("the quick brown fox jumps over the lazy dog");
+
+            Assert.AreEqual(expected, actual);
+        }
+        [TestMethod]
+        public void IsAPanagramUpperCase()
+        {
+            string expected = "Is A Panagram";
+            string actual = DetermineIfIsAPanagram("The QUICK brown FoX juMPs over the lAZy dog");
 
             Assert.AreEqual(expected, actual);
         }
@@ -22,6 +30,8 @@ namespace Panagram
             {
                 if (phrase[i] >= 'a' && phrase[i] <= 'z')
                     apparition[phrase[i] - 'a']++;
+                else  if (phrase[i] >= 'A' && phrase[i] <= 'Z')
+                    apparition[phrase[i] - 'A']++;
             }
             answer = CheckApparition(answer, apparition);
 
