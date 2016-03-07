@@ -7,84 +7,56 @@ namespace Panagram
     public class PanagramTest
     {
         [TestMethod]
-        public void IsAPanagram()
+        public void IsAPangram()
         {
-            string expected = "Is A Panagram" ;
-            string actual = DetermineIfIsAPanagram("the quick brown fox jumps over the lazy dog");
+            bool expected = true;
+            bool actual = DetermineIfIsAPangram("the quick brown fox jumps over the lazy dog");
 
             Assert.AreEqual(expected, actual);
         }
         [TestMethod]
-        public void IsAPanagramUpperCase()
+        public void IsAPangramUpperCase()
         {
-            string expected = "Is A Panagram";
-            string actual = DetermineIfIsAPanagram("The QUICK brown FoX juMPs over the lAZy dog");
-
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void IsNotAPanagramLessWords()
-        {
-            string expected = "Is Not A Panagram";
-            string actual = DetermineIfIsAPanagram("FOX jumps over the lazy dog");
+            bool expected = true;
+            bool actual = DetermineIfIsAPangram("The QUICK brown FoX juMPs over the lAZy dog");
 
             Assert.AreEqual(expected, actual);
         }
 
         [TestMethod]
-        public void IsNotAPanagramNumber()
+        public void IsNotAPangramLessWords()
         {
-            string expected = "Is Not A Panagram";
-            string actual = DetermineIfIsAPanagram("The QUI12 brown FoX juMPs over the lAZy dog");
+            bool expected = false;
+            bool actual = DetermineIfIsAPangram("FOX jumps over the lazy dog");
 
             Assert.AreEqual(expected, actual);
         }
-        string DetermineIfIsAPanagram (string phrase)
-        {
-            string answer = "";
-            int[] apparition = new int[26];
-            CheckCharacters(phrase, apparition);
-            answer = CheckApparition(answer, apparition);
 
-            return answer;
+        [TestMethod]
+        public void IsNotAPangramNumber()
+        {
+            bool expected = false;
+            bool actual = DetermineIfIsAPangram("The QUI12 brown FoX juMPs over the lAZy dog");
+
+            Assert.AreEqual(expected, actual);
         }
-
-        private static void CheckCharacters(string phrase, int[] apparition)
+        bool DetermineIfIsAPangram(string phrase)
         {
-            for (int i = 0; i < phrase.Length; i++)
-            {
-                if (char.IsNumber(phrase[i])) break;
-                else
-                {
-                    if (phrase[i] >= 'a' && phrase[i] <= 'z')
-                        apparition[phrase[i] - 'a']++;
-                    else if (phrase[i] >= 'A' && phrase[i] <= 'Z')
-                        apparition[phrase[i] - 'A']++;
-
-                }
-
-            }
-        }
-
-        private static string CheckApparition(string answer, int[] apparition)
-        {
+            string phraseLowerCase = phrase.ToLower();
+            string alphabet = "abcdefghijklmnopqrstuvwxyz";
             bool findChar = true;
-            int i = 0;
-            while (i <=25)
+         for (int i = 0; i < alphabet.Length; i++)
             {
-               findChar = false;
-                if (apparition[i] != 0)
-                    findChar = true;
-                else break;
-                i++;
+                if (phraseLowerCase.IndexOf(alphabet[i]) == -1)
+                {
+                    findChar = false;
+                }
             }
-            if (findChar)
-                answer += "Is A Panagram";
-            else
-                answer += "Is Not A Panagram";
-
-            return answer;
+            return findChar;
         }
+
+        
     }
 }
+
+    
