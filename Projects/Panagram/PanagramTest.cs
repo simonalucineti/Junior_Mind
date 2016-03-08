@@ -43,11 +43,11 @@ namespace Panagram
         bool DetermineIfIsAPangram(string phrase)
         {
             string phraseLowerCase = phrase.ToLower();
-            string alphabet = "abcdefghijklmnopqrstuvwxyz";
+         // string alphabet = "abcdefghijklmnopqrstuvwxyz";
             bool findChar = true;
-         for (int i = 0; i < alphabet.Length; i++)
+         for (int i = 0; i < 25; i++)
             {
-                if (phraseLowerCase.IndexOf(alphabet[i]) == -1)
+                if (phraseLowerCase.IndexOf((char)('a'+i)) == -1)
                 {
                     findChar = false;
                 }
