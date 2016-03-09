@@ -27,16 +27,16 @@ namespace ExcelColumn
             while (columnNumber > 0)
             {
                 columnNumber--;
-                columnName = GetCharacter(columnNumber) + columnName;
+                columnName = GetCharacter(columnNumber%26) + columnName;
                 columnNumber /= 26;
             }
 
             return columnName; 
         }
 
-        private static char GetCharacter(int number)
+        string GetCharacter(int number)
         {
-            return (char)('A' + columnNumber % 26);
+          return Convert.ToChar('A' + number).ToString();
         }
     }
 }
