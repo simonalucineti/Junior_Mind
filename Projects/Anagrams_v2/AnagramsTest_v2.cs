@@ -16,6 +16,11 @@ namespace Anagrams_v2
         {
             Assert.AreEqual(6, Factorial(3));
         }
+        [TestMethod]
+        public void DetermineMatches()
+        {
+            Assert.AreEqual(4, CountMatches("anamaria", 'a'));
+        }
 
         int GenerateAnagrams(string word)
         {
@@ -30,6 +35,16 @@ namespace Anagrams_v2
                 factorial *= i;
 
             return factorial;
+        }
+        int CountMatches(string word, char match)
+        {
+            int matches = 0;
+            for (int i = 0; i < word.Length; i++)
+            {
+                if (word[i].Equals(match))
+                    matches++;
+            }
+            return matches;
         }
     }
 }
