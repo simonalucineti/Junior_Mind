@@ -11,6 +11,18 @@ namespace Anagrams_v2
         {
             Assert.AreEqual(24, GenerateAnagrams("wxyz"));
         }
+
+        [TestMethod]
+        public void NoDistinctLetters()
+        {
+            Assert.AreEqual(1, GenerateAnagrams("aaaa"));
+        }
+
+        [TestMethod]
+        public void SomeLettersAreRepeted()
+        {
+            Assert.AreEqual(3, GenerateAnagrams("aab"));
+        }
         [TestMethod]
         public void CalculateFactorial()
         {
@@ -30,7 +42,16 @@ namespace Anagrams_v2
         int GenerateAnagrams(string word)
         {
             int numberOfAnagrams = 0;
-            return numberOfAnagrams = Factorial(word.Length);
+            numberOfAnagrams = Factorial(word.Length);
+            string distinctChar = FindDistinct(word);
+            int i = 0;
+            while (i < distinctChar.Length)
+            {
+                int matchDistinctChar = CountMatches(word, distinctChar[i]);
+                i++;
+                numberOfAnagrams /= Factorial(matchDistinctChar);
+            }
+            return numberOfAnagrams;
         }
 
         int Factorial(int numberOfChar)
