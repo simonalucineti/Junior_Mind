@@ -21,6 +21,11 @@ namespace Anagrams_v2
         {
             Assert.AreEqual(4, CountMatches("anamaria", 'a'));
         }
+        [TestMethod]
+        public void DetermineUniques()
+        {
+            Assert.AreEqual("anmri", FindDistinct("anamaria"));
+        }
 
         int GenerateAnagrams(string word)
         {
@@ -45,6 +50,19 @@ namespace Anagrams_v2
                     matches++;
             }
             return matches;
+        }
+
+        string FindDistinct(string word)
+        {
+            string distinct = "";
+
+            for (int i = 0; i < word.Length; i++)
+            {
+                if (!distinct.Contains(word[i].ToString()))
+                    distinct += word[i];
+            }
+
+            return distinct;
         }
     }
 }
