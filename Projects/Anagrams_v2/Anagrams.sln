@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anagrams", "Anagrams.csproj", "{47DD4BF1-85E0-48D5-BD93-750C96A33391}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Anagrams_v2", "Anagrams_v2.csproj", "{0772AC38-FAAF-4ED5-94BD-322F79359216}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{47DD4BF1-85E0-48D5-BD93-750C96A33391}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{47DD4BF1-85E0-48D5-BD93-750C96A33391}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{47DD4BF1-85E0-48D5-BD93-750C96A33391}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{47DD4BF1-85E0-48D5-BD93-750C96A33391}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0772AC38-FAAF-4ED5-94BD-322F79359216}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0772AC38-FAAF-4ED5-94BD-322F79359216}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0772AC38-FAAF-4ED5-94BD-322F79359216}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0772AC38-FAAF-4ED5-94BD-322F79359216}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
