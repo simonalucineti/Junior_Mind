@@ -15,11 +15,21 @@ namespace Lottery
         public void CombinationPossibleTest()
         {
             Assert.AreEqual(13983816, CombinationPossible(49, 6));
-        } 
+        }
+        [TestMethod]
+        public void FirstCategory()
+        {
+            Assert.AreEqual(7.15112384201852E-8, CalculateProbabilityToWin(6, 6, 49), 0.00001);
+        }
 
+        [TestMethod]
+        public void FirstCategoryFiveForForty()
+        {
+            Assert.AreEqual(1.519738361843625e-6, CalculateProbabilityToWin(5, 5, 40));
+        }
         double CalculateProbabilityToWin(double ticketNumbers, double winNumbers, double totalNumbers)
         {
-            return 0;
+            return 1 / CombinationPossible(totalNumbers, winNumbers); 
         }
         double Factorial(double number)
         {
