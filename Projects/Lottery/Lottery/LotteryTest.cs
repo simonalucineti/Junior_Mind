@@ -17,6 +17,12 @@ namespace Lottery
             Assert.AreEqual(13983816, CombinationPossible(49, 6));
         }
         [TestMethod]
+        public void WinAndTicketNumberTest()
+        {
+            Assert.AreEqual(15, CombinationWinToTicketNumbers(6, 4));
+        }
+
+        [TestMethod]
         public void FirstCategory()
         {
             Assert.AreEqual(7.15112384201852E-8, CalculateProbabilityToWin(6, 6, 49), 0.00001);
@@ -47,5 +53,13 @@ namespace Lottery
 
             return combinatorics;
         }
+
+        double CombinationWinAndTicketNumbers(double winNumbers, double ticketNumbers)
+        {
+            double winAndTichetNumbers = Factorial(winNumbers) /
+                                        (Factorial(ticketNumbers) * Factorial(winNumbers - ticketNumbers));
+            return winAndTichetNumbers;
+        }
+
     }
 }
