@@ -11,6 +11,12 @@ namespace Lottery
         {
             Assert.AreEqual(24, Factorial(4));
         }
+        [TestMethod]
+        public void CombinationPossibleTest()
+        {
+            Assert.AreEqual(13983816, CombinationPossible(49, 6));
+        } 
+
         double CalculateProbabilityToWin(double ticketNumbers, double winNumbers, double totalNumbers)
         {
             return 0;
@@ -22,6 +28,14 @@ namespace Lottery
                 factorial *= i;
 
             return factorial;
+        }
+
+        double CombinationPossible(double totalNumbers, double winNumbers)
+        {
+            double combinatorics = Factorial(totalNumbers) /
+                                   (Factorial(winNumbers) * Factorial((totalNumbers - winNumbers)));
+
+            return combinatorics;
         }
     }
 }
