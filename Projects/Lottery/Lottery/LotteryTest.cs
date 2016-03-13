@@ -19,7 +19,12 @@ namespace Lottery
         [TestMethod]
         public void WinAndTicketNumberTest()
         {
-            Assert.AreEqual(15, CombinationWinToTicketNumbers(6, 4));
+            Assert.AreEqual(15, CombinationWinAndTicketNumbers(6, 4));
+        }
+        [TestMethod]
+        public void NotOnTicketAndNotMatches()
+        {
+            Assert.AreEqual(903, CombinationNotOnTicketToNotMatchesNumbers(43, 2));
         }
 
         [TestMethod]
@@ -61,5 +66,12 @@ namespace Lottery
             return winAndTichetNumbers;
         }
 
+        double CombinationNotOnTicketToNotMatchesNumbers(double NotMatchesNumbers, double NotOnTheTicketNumbers)
+        {
+            double NotMatchesAndNotTicketNumbers = Factorial(NotMatchesNumbers) /
+            (Factorial(NotOnTheTicketNumbers) * Factorial(NotMatchesNumbers - NotOnTheTicketNumbers));
+
+            return Math.Round(NotMatchesAndNotTicketNumbers);
+        }
     }
 }
