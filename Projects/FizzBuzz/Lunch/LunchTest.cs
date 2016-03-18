@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Lunch
@@ -11,17 +11,17 @@ namespace Lunch
         {
             Assert.AreEqual(12, DetermineTheNextMeeting(6, 4));
         }
-        int DetermineTheNextMeeting(int frequentedByFriend, int frequentedByMe) {
+        int DetermineTheNextMeeting(int hisNumber, int myNumber) {
             //c.m.m.m.c a doua numere
-            var fFriend = frequentedByFriend;
-            var fMe = frequentedByMe;
-            while (fMe != 0)
+            var friend = hisNumber;
+            var i = myNumber;
+            while (i != 0)
             {
-               int restOfDivison = fFriend % fMe;
-                fFriend = fMe;
-                fMe = restOfDivison;
+               int restOfDivison = friend % i;
+                friend = i;
+                i = restOfDivison;
             }
-            return (frequentedByFriend*frequentedByMe)/fFriend;
+            return (hisNumber*myNumber)/friend;
         }
     }
 }
