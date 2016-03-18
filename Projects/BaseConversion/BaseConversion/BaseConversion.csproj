@@ -3,11 +3,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{2D8F242B-3471-489C-9ABD-E5F89C0F8A06}</ProjectGuid>
+    <ProjectGuid>{612DF83B-3491-4063-B889-938838CF92E3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Base_Conversion</RootNamespace>
-    <AssemblyName>Base Conversion</AssemblyName>
+    <RootNamespace>BaseConversion</RootNamespace>
+    <AssemblyName>BaseConversion</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>

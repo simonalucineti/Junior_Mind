@@ -1,17 +1,17 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Base_Conversion
+namespace BaseConversion
 {
     [TestClass]
-    public class ConversionTest
+    public class ConverterTest
     {
         [TestMethod]
         public void ReverseTest()
         {
-            CollectionAssert.AreEqual(new byte[] {1,0,0}, Reverse(new byte[] {0,0,1}));
+            CollectionAssert.AreEqual(new byte[] { 1, 0, 0 }, Reverse(new byte[] { 0, 0, 1 }));
         }
-      byte[] Reverse (byte[] array)
+        byte[] Reverse(byte[] array)
         {
             byte[] reverseArray = new byte[array.Length];
             for (int i = 0; i < array.Length; i++)
