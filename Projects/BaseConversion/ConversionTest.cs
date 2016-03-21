@@ -1,10 +1,10 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace BaseConversion
+namespace Base_Conversion
 {
     [TestClass]
-    public class ConverterTest
+    public class ConversionTest
     {
         [TestMethod]
         public void ReverseTest()
@@ -18,5 +18,6 @@ namespace BaseConversion
                 reverseArray[i] = array[array.Length - i - 1];
             return reverseArray;
         }
+
     }
 }
