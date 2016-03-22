@@ -16,6 +16,13 @@ namespace Base_Conversion
         {
             CollectionAssert.AreEqual(new byte[] { 1, 0, 0 }, ConvertFromBaseTenInAnother(4,2));
         }
+        [TestMethod]
+        public void OperationNotTest()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 1, 0 }, OperationNot(new byte[] { 1, 0, 1 }));
+        }
+
+
         byte[] Reverse(byte[] array)
         {
             byte[] reverseArray = new byte[array.Length];
@@ -23,17 +30,24 @@ namespace Base_Conversion
                 reverseArray[i] = array[array.Length - i - 1];
             return reverseArray;
         }
-        byte[] ConvertFromBaseTenInAnother(int number, int baza)
+        byte[] ConvertFromBaseTenInAnother(int number, int radix)
         {
             byte[] numberConverted = { };
             while (number != 0)
             {
                 Array.Resize(ref numberConverted, numberConverted.Length + 1);
-                numberConverted[numberConverted.Length - 1] = (byte)(number % baza);
-                number /= baza;
+                numberConverted[numberConverted.Length - 1] = (byte)(number % radix);
+                number /= radix;
             }
             return Reverse(numberConverted);
 
+        }
+        byte[] OperationNot(byte[] array)
+        {
+           
+           for (int i = 0; i < array.Length; i++)
+                array[i] = (array[i] == 0) ? (byte)1 : (byte)0;
+            return array;
         }
     }
 }
