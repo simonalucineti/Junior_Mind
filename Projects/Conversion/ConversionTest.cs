@@ -56,6 +56,16 @@ namespace Base_Conversion
         {
             CollectionAssert.AreEqual(new byte[] { 0, 1, 1 }, ExecuteSelectDecision(new byte[] { 1, 1, 0 }, new byte[] { 1, 0, 1 }, "XOR"));
         }
+        [TestMethod]
+        public void LeftShiftOperationTest1()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 1, 0, 1, 0, 1, 0, 0, 0, 0 }, UseShiftOperation(new byte[] { 0, 1, 0, 1, 0, 1 },"LEFT", 4));
+        }
+        [TestMethod]
+        public void RightShiftOperationTest2()
+        {
+            CollectionAssert.AreEqual(new byte[] {0, 0, 0, 1, 0, 1 }, UseShiftOperation(new byte[] { 1, 0, 1 }, "RIGHT", 3));
+        }
 
 
         byte[] Reverse(byte[] array)
@@ -126,6 +136,25 @@ namespace Base_Conversion
             return Reverse(result);
         }
 
+        byte[] UseShiftOperation(byte [] array, string shift, int steps)
+        {
+            if (shift == "LEFT")
+            {
+                Array.Resize(ref array, array.Length + steps);
+                return array;
+            }
 
+            else if (shift == "RIGHT")
+            {
+                byte[] result = new byte[array.Length + steps];
+                for (int i = 0; i < result.Length; i++)
+                {
+                    if (i < steps) result[i] = 0;
+                    else result[i] = array[i - steps];
+                }
+                return result;
+            }
+            return new byte[] {0};
+        }
     }
 }
