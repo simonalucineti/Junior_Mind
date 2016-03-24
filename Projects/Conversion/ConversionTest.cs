@@ -14,7 +14,7 @@ namespace Base_Conversion
         [TestMethod]
         public void ConvertingADecimalNumberInAnotherBaseTest()
         {
-            CollectionAssert.AreEqual(new byte[] { 1, 0, 0 }, ConvertFromBaseTenInAnother(4,2));
+            CollectionAssert.AreEqual(new byte[] { 1, 0, 0 }, ConvertFromBaseTenInAnother(4, 2));
         }
         [TestMethod]
         public void OperationNotTest()
@@ -24,20 +24,39 @@ namespace Base_Conversion
         [TestMethod]
         public void ReturnArrayWithZeroAtBeginningTest1()
         {
-            Assert.AreEqual((byte) 0, AddZeroForTheShorter(new byte[] { 1, 1 }, 5));
+            Assert.AreEqual((byte)0, AddZeroForTheShorter(new byte[] { 1, 1 }, 5));
         }
 
         [TestMethod]
         public void ReturnArrayWithZeroAtBeginningTest2()
         {
-            Assert.AreEqual((byte)1, AddZeroForTheShorter(new byte[] { 1,1,1,0 }, 3));
+            Assert.AreEqual((byte)1, AddZeroForTheShorter(new byte[] { 1, 1, 1, 0 }, 3));
         }
 
         [TestMethod]
         public void EliminateZeroFromBeginningTest()
         {
-            CollectionAssert.AreEqual(new byte[] {1,0,1}, EliminateZeroFromBeginning(new byte[] { 0,0,1,0,1}));
+            CollectionAssert.AreEqual(new byte[] { 1, 0, 1 }, EliminateZeroFromBeginning(new byte[] { 0, 0, 1, 0, 1 }));
         }
+
+       [TestMethod]
+        public void AndOperationTest()
+        {
+            CollectionAssert.AreEqual(new byte[] {0, 1, 0, 0 }, ExecuteSelectDecision(new byte[] { 1,0,1 }, new byte[] { 1,1,1,0}, "AND"));
+        }
+
+        [TestMethod]
+        public void OrOperationTest()
+        {
+            CollectionAssert.AreEqual(new byte[] { 1, 0, 1,1 }, ExecuteSelectDecision(new byte[] { 1, 0, 1,1 }, new byte[] { 0,0,1}, "OR"));
+        }
+
+        [TestMethod]
+        public void XorOperationTest()
+        {
+            CollectionAssert.AreEqual(new byte[] { 0, 1, 1 }, ExecuteSelectDecision(new byte[] { 1, 1, 0 }, new byte[] { 1, 0, 1 }, "XOR"));
+        }
+
 
         byte[] Reverse(byte[] array)
         {
@@ -60,15 +79,15 @@ namespace Base_Conversion
         }
         byte[] OperationNot(byte[] array)
         {
-           
-           for (int i = 0; i < array.Length; i++)
+
+            for (int i = 0; i < array.Length; i++)
                 array[i] = (array[i] == 0) ? (byte)1 : (byte)0;
             return array;
         }
 
         byte AddZeroForTheShorter(byte[] array, int i)
         {
-            if (i<array.Length) 
+            if (i < array.Length)
                 return array[array.Length - i - 1];
             return (byte)0;
         }
@@ -76,17 +95,37 @@ namespace Base_Conversion
         byte[] EliminateZeroFromBeginning(byte[] array)
         {
             int i;
-           
-            for (i=0; i<array.Length; i++)
+
+            for (i = 0; i < array.Length; i++)
             {
-                if (array[i]!=0) break;
+                if (array[i] != 0) break;
             }
             byte[] withoutZero = new byte[array.Length - i];
-            for (int k=i; k<array.Length; k++)
+            for (int k = i; k < array.Length; k++)
             {
                 withoutZero[k - i] = array[k];
             }
             return withoutZero;
         }
+
+        byte SelectLogicalOperation(byte x, byte y, string decision)
+        {
+            if (decision == "AND") return x == (byte)1 && y == (byte)1 ? (byte)1 : (byte)0;
+            if (decision == "OR")  return x == (byte)1 || y == (byte)1 ? (byte)1 : (byte)0;
+            if (decision == "XOR") return x == y ? (byte)0 : (byte)1;
+            return 0;
+         }
+
+         byte[] ExecuteSelectDecision (byte [] firstArray, byte[] secondArray, string decision)
+        {
+            byte[] result =new byte [Math.Max(firstArray.Length, secondArray.Length)];
+            for (int i=0; i<result.Length; i++)
+            {
+                result[i] = SelectLogicalOperation(AddZeroForTheShorter(firstArray, i), AddZeroForTheShorter(secondArray, i), decision);
+            }
+            return Reverse(result);
+        }
+
+
     }
 }
