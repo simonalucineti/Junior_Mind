@@ -67,6 +67,49 @@ namespace Base_Conversion
             CollectionAssert.AreEqual(new byte[] {0, 0, 0, 1, 0, 1 }, UseShiftOperation(new byte[] { 1, 0, 1 }, "RIGHT", 3));
         }
 
+        [TestMethod]
+        public void LessThanOperationTest1()
+        {
+            Assert.AreEqual(true, LessThanOperation(new byte[] { 0, 0, 0, 1 }, new byte[] { 0, 0, 0, 1, 0 }));
+        }
+        [TestMethod]
+        public void LessThanOperationTest2()
+        {
+            Assert.AreEqual(false, LessThanOperation(new byte[] {0,0,0,0,1, 0, 0 }, new byte[] { 0, 1, 0 }));
+        }
+
+        [TestMethod]
+        public void EqualToOperationTest1()
+        {
+            Assert.AreEqual(true, EqualToOperation(new byte[] { 0, 0, 0, 0, 1, 0, 0 }, new byte[] { 1, 0, 0 }));
+        }
+        [TestMethod]
+        public void EqualToOperationTest2()
+        {
+            Assert.AreEqual(false, EqualToOperation(new byte[] {0, 1, 0, 0 }, new byte[] { 1,0,0,0}));
+        }
+
+        [TestMethod]
+        public void GreaterThanOperationTest1()
+        {
+            Assert.AreEqual(false, GreaterThanOperation(new byte[] {0,0,0,0,0,1,1,0}, new byte[] {0,0,1,1,0}));
+        }
+        [TestMethod]
+        public void GreaterThanOperationTest2()
+        {
+            Assert.AreEqual(true, GreaterThanOperation(new byte[] { 1, 0, 1 }, new byte[] {0,0,0,0, 0, 1, 1}));
+        }
+
+        [TestMethod]
+        public void NotEqualOperationTest1()
+        {
+            Assert.AreEqual(false, NotEqualOperation(new byte[] { 1, 0, 1 }, new byte[] { 0, 0, 0, 0, 1, 0, 1 }));
+        }
+        [TestMethod]
+        public void NotEqualOperationTest2()
+        {
+            Assert.AreEqual(true, NotEqualOperation(new byte[] { 0, 1, 0 }, new byte[] { 1, 0, 1 }));
+        }
 
         byte[] Reverse(byte[] array)
         {
@@ -156,5 +199,36 @@ namespace Base_Conversion
             }
             return new byte[] {0};
         }
+
+      public bool LessThanOperation(byte[] firstArray, byte[] secondArray)
+        {
+            firstArray = EliminateZeroFromBeginning(firstArray);
+            secondArray = EliminateZeroFromBeginning(secondArray);
+            if (firstArray.Length < secondArray.Length) return true;
+            if (firstArray.Length == secondArray.Length)
+            {
+                for (int i = 0; i < firstArray.Length; i++)
+                    if (firstArray[i] < secondArray[i]) return true;
+            }
+            return false;
+        }
+        
+        public bool EqualToOperation(byte[] firstArray, byte[] secondArray)
+        {
+            if (LessThanOperation(firstArray, secondArray) == false &&
+                LessThanOperation(secondArray,firstArray) == false) return true;
+            return false;
+        }
+
+        public bool GreaterThanOperation(byte[] firstArray, byte[] secondArray)
+        {
+           return LessThanOperation(secondArray, firstArray);
+        }
+
+        public bool NotEqualOperation (byte[] firstArray, byte[] secondArray)
+        {
+            return !(EqualToOperation(firstArray, secondArray));
+        }
+
     }
 }
