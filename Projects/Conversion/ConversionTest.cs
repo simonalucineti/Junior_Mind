@@ -39,76 +39,99 @@ namespace Base_Conversion
             CollectionAssert.AreEqual(new byte[] { 1, 0, 1 }, EliminateZeroFromBeginning(new byte[] { 0, 0, 1, 0, 1 }));
         }
 
-       [TestMethod]
+        [TestMethod]
         public void AndOperationTest()
         {
-            CollectionAssert.AreEqual(new byte[] {0, 1, 0, 0 }, ExecuteSelectDecision(new byte[] { 1,0,1 }, new byte[] { 1,1,1,0}, "AND"));
+            CollectionAssert.AreEqual(ToBinary(9 & 12), And(ToBinary(9), ToBinary(12)));
         }
 
         [TestMethod]
         public void OrOperationTest()
         {
-            CollectionAssert.AreEqual(new byte[] { 1, 0, 1,1 }, ExecuteSelectDecision(new byte[] { 1, 0, 1,1 }, new byte[] { 0,0,1}, "OR"));
+            CollectionAssert.AreEqual(ToBinary(1 | 11), Or(ToBinary(1), ToBinary(11)));
         }
 
         [TestMethod]
         public void XorOperationTest()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 1, 1 }, ExecuteSelectDecision(new byte[] { 1, 1, 0 }, new byte[] { 1, 0, 1 }, "XOR"));
+            CollectionAssert.AreEqual(new byte[] { 0, 1, 1 }, Xor(ToBinary(5), ToBinary(6)));
         }
         [TestMethod]
         public void LeftShiftOperationTest1()
         {
-            CollectionAssert.AreEqual(new byte[] { 0, 1, 0, 1, 0, 1, 0, 0, 0, 0 }, UseShiftOperation(new byte[] { 0, 1, 0, 1, 0, 1 },"LEFT", 4));
+            CollectionAssert.AreEqual(ToBinary(15<<4), UseShiftOperation(ToBinary(15), "LEFT", 4));
         }
         [TestMethod]
         public void RightShiftOperationTest2()
         {
-            CollectionAssert.AreEqual(new byte[] {0, 0, 0, 1, 0, 1 }, UseShiftOperation(new byte[] { 1, 0, 1 }, "RIGHT", 3));
+            CollectionAssert.AreEqual(ToBinary(10>>3), UseShiftOperation(ToBinary(10), "RIGHT", 3));
+        }
+        [TestMethod]
+        public void RightShiftOperationTest3()
+        {
+            CollectionAssert.AreEqual(ToBinary(4 >> 2), UseShiftOperation(ToBinary(4), "RIGHT", 2));
         }
 
         [TestMethod]
         public void LessThanOperationTest1()
         {
-            Assert.AreEqual(true, LessThanOperation(new byte[] { 0, 0, 0, 1 }, new byte[] { 0, 0, 0, 1, 0 }));
+            Assert.AreEqual(true, LessThanOperation(ToBinary(1), ToBinary(2)));
         }
         [TestMethod]
         public void LessThanOperationTest2()
         {
-            Assert.AreEqual(false, LessThanOperation(new byte[] {0,0,0,0,1, 0, 0 }, new byte[] { 0, 1, 0 }));
+            Assert.AreEqual(false, LessThanOperation(ToBinary(5), ToBinary(4)));
         }
 
         [TestMethod]
         public void EqualToOperationTest1()
         {
-            Assert.AreEqual(true, EqualToOperation(new byte[] { 0, 0, 0, 0, 1, 0, 0 }, new byte[] { 1, 0, 0 }));
+            Assert.AreEqual(true, EqualToOperation(ToBinary(10), ToBinary(10)));
         }
         [TestMethod]
         public void EqualToOperationTest2()
         {
-            Assert.AreEqual(false, EqualToOperation(new byte[] {0, 1, 0, 0 }, new byte[] { 1,0,0,0}));
+            Assert.AreEqual(false, EqualToOperation(ToBinary(11), ToBinary(7)));
         }
 
         [TestMethod]
         public void GreaterThanOperationTest1()
         {
-            Assert.AreEqual(false, GreaterThanOperation(new byte[] {0,0,0,0,0,1,1,0}, new byte[] {0,0,1,1,0}));
+            Assert.AreEqual(false, GreaterThanOperation(ToBinary(9), ToBinary(9)));
         }
         [TestMethod]
         public void GreaterThanOperationTest2()
         {
-            Assert.AreEqual(true, GreaterThanOperation(new byte[] { 1, 0, 1 }, new byte[] {0,0,0,0, 0, 1, 1}));
+            Assert.AreEqual(true, GreaterThanOperation(ToBinary(7), ToBinary(6)));
         }
 
         [TestMethod]
         public void NotEqualOperationTest1()
         {
-            Assert.AreEqual(false, NotEqualOperation(new byte[] { 1, 0, 1 }, new byte[] { 0, 0, 0, 0, 1, 0, 1 }));
+            Assert.AreEqual(false, NotEqualOperation(ToBinary(12), ToBinary(12)));
         }
         [TestMethod]
         public void NotEqualOperationTest2()
         {
-            Assert.AreEqual(true, NotEqualOperation(new byte[] { 0, 1, 0 }, new byte[] { 1, 0, 1 }));
+            Assert.AreEqual(true, NotEqualOperation(ToBinary(13), ToBinary(21)));
+        }
+
+        [TestMethod]
+        public void AddOperationTest1()
+        {
+            CollectionAssert.AreEqual(ToBinary(121+19), Add(ToBinary(121), ToBinary(19), 2));
+        }
+
+        [TestMethod]
+        public void SubstractionTest1()
+        {
+            CollectionAssert.AreEqual(ToBinary(14-8), Substraction(ToBinary(14), ToBinary(8), 2));
+        }
+
+        [TestMethod]
+        public void SubstractionTest2()
+        {
+            CollectionAssert.AreEqual(ToBinary(171 - 128), Substraction(ToBinary(128), ToBinary(171), 2));
         }
 
         byte[] Reverse(byte[] array)
@@ -128,8 +151,14 @@ namespace Base_Conversion
                 number /= radix;
             }
             return Reverse(numberConverted);
+         }
 
+        byte[] ToBinary(int number)
+        {
+            return ConvertFromBaseTenInAnother(number, 2);
         }
+
+
         byte[] OperationNot(byte[] array)
         {
 
@@ -164,22 +193,35 @@ namespace Base_Conversion
         byte SelectLogicalOperation(byte x, byte y, string decision)
         {
             if (decision == "AND") return x == (byte)1 && y == (byte)1 ? (byte)1 : (byte)0;
-            if (decision == "OR")  return x == (byte)1 || y == (byte)1 ? (byte)1 : (byte)0;
+            if (decision == "OR") return x == (byte)1 || y == (byte)1 ? (byte)1 : (byte)0;
             if (decision == "XOR") return x == y ? (byte)0 : (byte)1;
             return 0;
-         }
+        }
 
-         byte[] ExecuteSelectDecision (byte [] firstArray, byte[] secondArray, string decision)
+        byte[] ExecuteSelectDecision(byte[] first, byte[] second, string decision)
         {
-            byte[] result =new byte [Math.Max(firstArray.Length, secondArray.Length)];
-            for (int i=0; i<result.Length; i++)
+            byte[] result = new byte[Math.Max(first.Length, second.Length)];
+            for (int i = 0; i < result.Length; i++)
             {
-                result[i] = SelectLogicalOperation(AddZeroForTheShorter(firstArray, i), AddZeroForTheShorter(secondArray, i), decision);
+                result[i] = SelectLogicalOperation(AddZeroForTheShorter(first, i), AddZeroForTheShorter(second, i), decision);
             }
             return Reverse(result);
         }
 
-        byte[] UseShiftOperation(byte [] array, string shift, int steps)
+        byte[] And(byte[] firstArray, byte[] secondArray)
+        {
+            return ExecuteSelectDecision(firstArray, secondArray, "AND");
+        }
+        byte[] Or(byte[] firstArray, byte[] secondArray)
+        {
+            return ExecuteSelectDecision(firstArray, secondArray, "OR");
+        }
+        byte[] Xor(byte[] firstArray, byte[] secondArray)
+        {
+            return ExecuteSelectDecision(firstArray, secondArray, "XOR");
+        }
+        
+        byte[] UseShiftOperation(byte[] array, string shift, int steps)
         {
             if (shift == "LEFT")
             {
@@ -189,46 +231,87 @@ namespace Base_Conversion
 
             else if (shift == "RIGHT")
             {
-                byte[] result = new byte[array.Length + steps];
-                for (int i = 0; i < result.Length; i++)
-                {
-                    if (i < steps) result[i] = 0;
-                    else result[i] = array[i - steps];
-                }
-                return result;
+
+                Array.Resize(ref array, array.Length - steps);
+                return array;
             }
-            return new byte[] {0};
+            return new byte[] { 0 };
         }
 
-      public bool LessThanOperation(byte[] firstArray, byte[] secondArray)
+        public bool LessThanOperation(byte[] first, byte[] second)
         {
-            firstArray = EliminateZeroFromBeginning(firstArray);
-            secondArray = EliminateZeroFromBeginning(secondArray);
-            if (firstArray.Length < secondArray.Length) return true;
-            if (firstArray.Length == secondArray.Length)
+            first = EliminateZeroFromBeginning(first);
+            second = EliminateZeroFromBeginning(second);
+            if (first.Length < second.Length) return true;
+            if (first.Length == second.Length)
             {
-                for (int i = 0; i < firstArray.Length; i++)
-                    if (firstArray[i] < secondArray[i]) return true;
+                for (int i = 0; i < first.Length; i++)
+                    if (first[i] < second[i]) return true;
             }
             return false;
         }
-        
-        public bool EqualToOperation(byte[] firstArray, byte[] secondArray)
+
+        public bool EqualToOperation(byte[] first, byte[] second)
         {
-            if (LessThanOperation(firstArray, secondArray) == false &&
-                LessThanOperation(secondArray,firstArray) == false) return true;
+            if (!(LessThanOperation(first, second)) &&
+               !(LessThanOperation(second, first))) return true;
             return false;
         }
 
-        public bool GreaterThanOperation(byte[] firstArray, byte[] secondArray)
+        public bool GreaterThanOperation(byte[] first, byte[] second)
         {
-           return LessThanOperation(secondArray, firstArray);
+            return LessThanOperation(second, first);
         }
 
-        public bool NotEqualOperation (byte[] firstArray, byte[] secondArray)
+        public bool NotEqualOperation(byte[] first, byte[] second)
         {
-            return !(EqualToOperation(firstArray, secondArray));
+            return !(EqualToOperation(first, second));
         }
 
+        byte[] Add(byte[] first, byte[] second, int radix)
+        {
+            byte[] result = new byte[Math.Max(first.Length, second.Length) + 1];
+            int carry = 0;
+            int sum = 0;
+            for (int i = result.Length - 1; i >= 0; i--)
+            {
+                sum = AddZeroForTheShorter(first, result.Length - i - 1) +
+                      AddZeroForTheShorter(second, result.Length - i - 1) + carry;
+                carry = sum / radix;
+                result[i] = (byte)(sum % radix);
+            }
+            return EliminateZeroFromBeginning(result);
+        }
+
+        public byte[] Substraction(byte[] first, byte[] second, int radix)
+        {
+            int sub = 0;
+            int carry = 0;
+
+            if (EqualToOperation(first, second)) return new byte[] {0};
+            byte[] subtrahend = new byte[] { };
+            byte[] low = new byte[] { };
+            subtrahend = GreaterThanOperation(first, second) ? first : second;
+            low = LessThanOperation(first, second) ? first : second;
+            low = UseShiftOperation(low, "RIGHT", subtrahend.Length - low.Length);
+            byte[] result = new byte[subtrahend.Length];
+           
+
+            for (int i = subtrahend.Length - 1; i >= 0; i--)
+            {
+                sub  = subtrahend [i] - low [i] - carry;
+                carry = 0;
+                if (sub < 0)
+                {
+                    carry++;
+                    sub = radix - (low[i] - subtrahend[i]);
+                    result[i] = (byte)sub;
+                }
+                else result[i] = (byte)sub;
+            }
+            return EliminateZeroFromBeginning(result); 
+        }
     }
-}
+ }
+    
+
