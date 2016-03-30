@@ -157,6 +157,21 @@ namespace Base_Conversion
             CollectionAssert.AreEqual(ToBinary(1), Divide(ToBinary(18), ToBinary(18), 2));
         }
 
+        [TestMethod]
+        public void FactorialTest1()
+        {
+            CollectionAssert.AreEqual(ToBinary(24), DetermineFactorial(ToBinary(4),2));
+        }
+
+        [TestMethod]
+        public void FactorialTest2()
+        {
+            var factorialFortyEight = DetermineFactorial(ToBinary(48), 2);
+            var factorialFortyNine = DetermineFactorial(ToBinary(49), 2);
+
+            CollectionAssert.AreEqual(ToBinary(49), Divide(factorialFortyNine,factorialFortyEight,2));
+        }
+
         byte[] Reverse(byte[] array)
         {
             byte[] reverseArray = new byte[array.Length];
@@ -349,7 +364,18 @@ namespace Base_Conversion
             }
             return result;
         }
-    }
+
+        byte[] DetermineFactorial(byte[] number, int radix)
+        {
+            byte[] factorial = new byte[] {1};
+            while(NotEqualOperation(number, new byte[] {0}))
+            {
+                factorial = Multiply(factorial, number, radix);
+                number = Substraction(number, new byte[] { 1 }, radix);
+            }
+            return factorial;
+        }
+        }
  }
     
 
