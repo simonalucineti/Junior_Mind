@@ -86,6 +86,20 @@ namespace Password
             Assert.AreEqual(4, CountNumbers(GeneratePassword(password)));
         }
 
+        [TestMethod]
+        public void ShuffleTest1()
+        {
+            var password = "uvwxyz";
+            Assert.AreEqual(false, password.Equals(ShufflePassword(password)));
+        }
+
+        [TestMethod]
+        public void ShuffleTest2()
+        {
+            var password = "u1wABz";
+            Assert.AreEqual(CountLowerLetters(ShufflePassword(password)), CountLowerLetters(password));
+        }
+
         Random random = new Random();
 
         int CountNumbers(string password)
@@ -121,11 +135,11 @@ namespace Password
         int CountSymbols(string password)
         {
             int count = 0;
-            string symbol = "!@#$%^&*()_\\-+={}[]:;'\"|,./<>?~";
+            string symbols = "!@#$%^&*()_\\-+={}[]:;'\"|,./<>?~";
             foreach (char c in password)
             {
 
-                if (symbol.Contains(c.ToString())) count++;
+                if (symbols.Contains(c.ToString())) count++;
             }
 
             return count;
@@ -167,9 +181,24 @@ namespace Password
             password += GenerateString(options.numbers, '0', '9' + 1, options.notAmbiquous);
             password += GenerateString(options.symbols, ' ', '/' + 1, options.notSimilar);
 
-            return password;
+            return ShufflePassword(password);
         }
 
+        string ShufflePassword (string password)
+        {
+            char[] shuffle = password.ToCharArray();
+            Random random = new Random();
+
+            for (int i=0; i<shuffle.Length; i++)
+            {
+                int j = random.Next(0, shuffle.Length);
+                char temp = shuffle[i];
+                shuffle[i] = shuffle[j];
+                shuffle[j] = temp;
+            }
+            
+            return new string (shuffle);
+        }
        
     }
 }
