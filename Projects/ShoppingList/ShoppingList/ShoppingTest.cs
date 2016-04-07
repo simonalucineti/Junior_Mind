@@ -3,12 +3,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Shopping
 {
-    public struct Products
+    public struct Product
     {
         public string product;
         public double price;
 
-        public Products(string product, double price)
+        public Product(string product, double price)
         {
             this.product = product;
             this.price = price;
@@ -21,66 +21,66 @@ namespace Shopping
         [TestMethod]
         public void TotalPriceTest()
         {
-            var shoppingList = new Products[] { new Products("milk", 2.5), new Products("vegetables", 7.75), new Products("fruits", 5.25),
-            new Products ("chocolate", 3.5)};
+            var shoppingList = new Product[] { new Product("milk", 2.5), new Product("vegetables", 7.75), new Product("fruits", 5.25),
+            new Product ("chocolate", 3.5)};
             Assert.AreEqual(19, CalculateTotalPrice(shoppingList));
         }
 
         [TestMethod]
         public void FindCheapestTest()
         {
-            var shoppingList = new Products[] { new Products("chips", 7.24), new Products("soda", 8.75), new Products("juice", 3.85),
-            new Products ("coffee", 3.65), new Products ("tea", 3.70)};
-            Assert.AreEqual(new Products("coffee", 3.65), FindCheapest(shoppingList));
+            var shoppingList = new Product[] { new Product("chips", 7.24), new Product("soda", 8.75), new Product("juice", 3.85),
+            new Product ("coffee", 3.65), new Product ("tea", 3.70)};
+            Assert.AreEqual(new Product("coffee", 3.65), FindCheapest(shoppingList));
         }
 
         [TestMethod]
         public void FindMostExpensiveTest()
         {
-            var shoppingList = new Products[] { new Products("chips", 7.24), new Products("soda", 8.75), new Products("juice", 3.85),
-            new Products ("coffee", 3.65), new Products ("tea", 3.75)};
+            var shoppingList = new Product[] { new Product("chips", 7.24), new Product("soda", 8.75), new Product("juice", 3.85),
+            new Product ("coffee", 3.65), new Product ("tea", 3.75)};
             Assert.AreEqual(1, FindPositionOfMostExpensive(shoppingList));
         }
 
         [TestMethod]
         public void RemoveMostExpensiveTest()
         {
-            var shoppingList = new Products[] { new Products("pizza", 7.24), new Products("water", 5.75), new Products("juice", 7.85),
-            new Products ("coffee", 3.65), new Products ("cheese", 6.75)};
+            var shoppingList = new Product[] { new Product("pizza", 7.24), new Product("water", 5.75), new Product("juice", 7.85),
+            new Product ("coffee", 3.65), new Product ("cheese", 6.75)};
             RemoveMostExpensive(shoppingList);
-            bool test = shoppingList[4].product != "juice";
+            bool test = shoppingList[2].product != "juice";
             Assert.IsTrue(test);
         }
 
         [TestMethod]
         public void AddNewProductTest()
         {
-            var actual = new Products[] { new Products("pizza", 7.24), new Products("water", 5.75) };
-            var expected = new Products[] { new Products("pizza", 7.24), new Products("water", 5.75), new Products("wine", 11.32) };
-            CollectionAssert.AreEqual(expected, AddNewProduct(actual, new Products("wine", 11.32)));
+            var actual = new Product[] { new Product("pizza", 7.24), new Product("water", 5.75) };
+            var expected = new Product[] { new Product("pizza", 7.24), new Product("water", 5.75), new Product("wine", 11.32) };
+            CollectionAssert.AreEqual(expected, AddNewProduct(actual, new Product("wine", 11.32)));
         }
 
         [TestMethod]
         public void CalculateAveragePriceTest()
         {
-            var shoppingList = new Products[] { new Products("chips", 7.00), new Products("soda", 8.50), new Products("juice", 3.00),
-            new Products ("coffee", 2.50), new Products ("tea", 4.00)};
+            var shoppingList = new Product[] { new Product("chips", 7.00), new Product("soda", 8.50), new Product("juice", 3.00),
+            new Product ("coffee", 2.50), new Product ("tea", 4.00)};
             Assert.AreEqual(5, CalculateAveragePrice(shoppingList));
         }
 
-        double CalculateTotalPrice(Products[] products)
+        double CalculateTotalPrice(Product[] product)
         {
             double totalPrice = 0;
-            for (int i = 0; i < products.Length; i++)
+            for (int i = 0; i < product.Length; i++)
             {
-                totalPrice += products[i].price;
+                totalPrice += product[i].price;
             }
             return totalPrice;
         }
 
-        Products FindCheapest(Products[] shoppingList)
+        Product FindCheapest(Product[] shoppingList)
         {
-            Products min = shoppingList[0];
+            Product min = shoppingList[0];
             for (int i = 1; i < shoppingList.Length; i++)
             {
                 if (shoppingList[i].price < min.price)
@@ -88,7 +88,7 @@ namespace Shopping
             }
             return min;
         }
-        int FindPositionOfMostExpensive(Products[] shoppingList)
+        int FindPositionOfMostExpensive(Product[] shoppingList)
         {
             int expensive = 0;
             for (int i = 1; i < shoppingList.Length; i++)
@@ -99,21 +99,21 @@ namespace Shopping
             return expensive;
         }
 
-        void RemoveMostExpensive(Products[] shoppingList)
+        void RemoveMostExpensive(Product[] shoppingList)
         {
             int position = FindPositionOfMostExpensive(shoppingList);
             shoppingList[position] = shoppingList[position + 1];
             Array.Resize(ref shoppingList, shoppingList.Length - 1);
 
         }
-        Products[] AddNewProduct(Products[] shoppingList, Products product)
+        Product[] AddNewProduct(Product[] shoppingList, Product product)
         {
             Array.Resize(ref shoppingList, shoppingList.Length + 1);
             shoppingList[shoppingList.Length - 1] = product;
             return shoppingList;
         }
 
-        double CalculateAveragePrice(Products[] shoppingList)
+        double CalculateAveragePrice(Product[] shoppingList)
         {
             return CalculateTotalPrice(shoppingList) / shoppingList.Length;
         }
