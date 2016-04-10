@@ -57,6 +57,16 @@ namespace Cyclometer
             Assert.AreEqual("Maria", FindSecondAndNameForMaxSpeed (cyclists, out second));
         }
 
+        [TestMethod]
+        public void FindBestAvgSpeedTest()
+        {
+            var cyclists = new Cyclist[] { new Cyclist ("Andreea", new int[] { 1,1,2,1}, 50),
+                                           new Cyclist("Ciprian", new int[] { 1, 2, 2}, 60),
+                                           new Cyclist("Maria", new int[] { 1,1,1,2}, 55)};
+           
+            Assert.AreEqual("Ciprian", FindCyclistWithBestAvgSpeed(cyclists));
+        }
+
         double CalculateDistancePerSecond(int rotationsPerSecond, int wheelDiameter)
         {
             return Math.Round(Math.PI * wheelDiameter * rotationsPerSecond);
@@ -108,5 +118,23 @@ namespace Cyclometer
             }
             return name;
         }
+        string FindCyclistWithBestAvgSpeed(Cyclist[] cyclist)
+        {
+            double bestAvgDistance = 0;
+            string bestCyclist = "";
+            for (int i=0; i<cyclist.Length; i++)
+            {
+                int time = cyclist[i].rotationsPerSecond.Length;
+                double actualAvgDistance = DetermineTotalDistanceForACyclist(cyclist[i]) / time;
+                if (actualAvgDistance > bestAvgDistance)
+                {
+                    bestAvgDistance = actualAvgDistance;
+                    bestCyclist = cyclist[i].name;
+                }
+            }
+            return bestCyclist;
+        }
+     
+
     }
 }
