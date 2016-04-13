@@ -19,6 +19,19 @@ namespace Cyclometer
                 this.wheelDiameter = wheelDiameter;
             }
         }
+
+        struct Result
+        {
+            public string name;
+            public int maxSecond;
+           // public int position;
+        public Result (string name, int maxSecond)
+            {
+                this.name = name;
+                this.maxSecond = maxSecond;
+               // this.position = position;
+            }
+        }
         [TestMethod]
         public void CalculateDistancePerSecondTest()
         {
@@ -44,7 +57,7 @@ namespace Cyclometer
         public void FindSecondOfMaxSpeedTest()
         {
             var cyclist = new Cyclist("Andreea", new int[] { 1, 2, 5, 1, 4, 2, 3 }, 50);
-            Assert.AreEqual(5, FindSecondForMaxSpeed(cyclist));
+            Assert.AreEqual(2, FindSecondForMaxSpeed(cyclist));
         }
 
         [TestMethod]
@@ -53,8 +66,10 @@ namespace Cyclometer
             var cyclists = new Cyclist[] { new Cyclist ("Andreea", new int[] { 1,3,2,5,1}, 50),
                                            new Cyclist("Ciprian", new int[] { 1, 2, 5}, 60),
                                            new Cyclist("Maria", new int[] { 1,5,1,3,2}, 65)};
-            int second = 5;
-            Assert.AreEqual("Maria", FindSecondAndNameForMaxSpeed (cyclists, out second));
+            
+            var result = new Result ("Maria", 1);
+          
+           Assert.AreEqual(result, FindSecondAndNameForMaxSpeed (cyclists));
         }
 
         [TestMethod]
@@ -93,22 +108,26 @@ namespace Cyclometer
         int FindSecondForMaxSpeed(Cyclist cyclist)
         {
             int second = 0;
-            for (int i = 0; i < cyclist.rotationsPerSecond.Length; i++)
+            for (int i = 1; i < cyclist.rotationsPerSecond.Length; i++)
             {
-                if (cyclist.rotationsPerSecond[i] > second)
-                    second = cyclist.rotationsPerSecond[i];
+                if (cyclist.rotationsPerSecond[i] > cyclist.rotationsPerSecond[second]) 
+                    // second = cyclist.rotationsPerSecond[i];
+                    second = i;
             }
             return second;
         }
-        string FindSecondAndNameForMaxSpeed(Cyclist[] cyclist, out int maxSecond)
+      Result FindSecondAndNameForMaxSpeed(Cyclist[] cyclist)
         {
-            maxSecond = 0;
+            int maxSecond = 0;
             double maxSpeed = 0;
             string name = "";
-            for (int i=0; i<cyclist.Length; i++)
+           
+
+            for (int i = 0; i < cyclist.Length; i++)
             {
-               int second = FindSecondForMaxSpeed(cyclist[i]);
-               double speed = CalculateDistancePerSecond(second, cyclist[i].wheelDiameter);
+                int second = FindSecondForMaxSpeed(cyclist[i]);
+                double speed = CalculateDistancePerSecond(cyclist[i].rotationsPerSecond[second], cyclist[i].wheelDiameter);
+                
                 if (speed > maxSpeed)
                 {
                     maxSpeed = speed;
@@ -116,7 +135,7 @@ namespace Cyclometer
                     name = cyclist[i].name;
                 }
             }
-            return name;
+            return new Result (name, maxSecond);
         }
         string FindCyclistWithBestAvgSpeed(Cyclist[] cyclist)
         {
