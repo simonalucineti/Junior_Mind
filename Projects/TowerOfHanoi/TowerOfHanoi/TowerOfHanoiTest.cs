@@ -40,18 +40,22 @@ namespace TowerOfHanoi
         {
             if (disk == 1)
             {
-                destination[0] = source[0];
-                Array.Resize(ref source, source.Length - 1);
-                return destination;
+               return MoveDisk(disk, source, destination);
             }
             else
             {
                 GetTower(disk - 1, source, temp, destination);
-                destination[disk - 1] = source[disk - 1];
-                Array.Resize(ref source, source.Length - 1);
+                MoveDisk(disk, source, destination);
                 GetTower(disk - 1, temp, destination, source);
                 return destination;
             }
+        }
+
+        private static int[] MoveDisk(int disk, int[] source, int[] destination)
+        {
+            destination[disk-1] = source[disk-1];
+            Array.Resize(ref source, source.Length - 1);
+            return destination;
         }
     }
 }
