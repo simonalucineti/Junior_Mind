@@ -3,20 +3,19 @@ using System.Collections;
 
 namespace List
 {
-    public interface IList
+    public interface IList<T>
     {
-        int this[int index] { get; set; }
-
+        T this[int index] { get; set; }
         int Count { get; }
         bool IsReadOnly { get; }
-        void Add(int value);
+        void Add(T value);
         void Clear();
-        bool Contains(int value);
-        void CopyTo(int[] array, int index);
+        bool Contains (T value);
+        void CopyTo(T[] array, int index);
         IEnumerator GetEnumerator();
-        int IndexOf(int value);
-        void Insert(int index, int value);
-        void Remove(int value);
+        int IndexOf(T value);
+        void Insert(int index, T value);
+        void Remove(T value);
         void RemoveAt(int index);
        
     }

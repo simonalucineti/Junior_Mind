@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace List
 {
-    public class List : IList, IEnumerable
+    public class List<T> : IList<T>, IEnumerable
     {
-        public int[] input = new int[6];
+        public T[] input = new T[6];
         public int count=0;
 
-        public int this[int index]
+        public T this [int index]
         {
             get
             {
@@ -21,7 +21,7 @@ namespace List
 
             set
             {
-                input[index]=(int)value;
+                input[index]= value;
             }
         }
 
@@ -41,7 +41,7 @@ namespace List
             }
         }
 
-        public void Add(int value)
+        public void Add(T value)
         {
             ResizeArray();
             input[count++] = value;
@@ -60,12 +60,12 @@ namespace List
           count=-1;
         }
 
-        public bool Contains(int value)
+        public bool Contains (T value)
         {
             bool find = false;
             for(int i=0; i<input.Length; i++)
             {
-                if (input[i]== value)
+                if (input[i].Equals(value))
                 {
                     find = true;
                     break;
@@ -74,7 +74,7 @@ namespace List
             return find;
         }
 
-        public void CopyTo(int[] array, int index)
+        public void CopyTo (T[] array, int index)
         {
             int k = index;
             for(int i = 0; i<count; i++)
@@ -84,23 +84,23 @@ namespace List
             }
         }
 
-        public IEnumerator GetEnumerator()
+        IEnumerator<T> GetEnumerator()
         {
             for (int i = 0; i < count; i++)
                 yield return input[i]; ;
         }
 
-        public int IndexOf(int value)
+        public int IndexOf (T value)
         {
             for(int i=0; i< count; i++)
             {
-                if (input[i] == value)
+                if (input[i].Equals(value))
                     return i;
             }
             return -1;
         }
 
-        public void Insert(int index, int value)
+        public void Insert (int index, T value)
         {
             ResizeArray();
             for (int i = input.Length-1; i > index; i--)
@@ -111,7 +111,7 @@ namespace List
             input[index] = value;
         }
 
-        public void Remove(int value)
+        public void Remove (T value)
         {
             if (Contains(value))
             {
@@ -134,5 +134,9 @@ namespace List
             return GetEnumerator();
         }
 
+        IEnumerator IList<T>.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
