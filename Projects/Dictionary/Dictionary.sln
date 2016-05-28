@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shopping", "Shopping\Shopping.csproj", "{65C676F4-11AE-4A61-8AD3-6C15A1382DEA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Dictionary", "Dictionary\Dictionary.csproj", "{ED4D98DB-9ACC-42C6-A1AE-08D368A95E5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{65C676F4-11AE-4A61-8AD3-6C15A1382DEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{65C676F4-11AE-4A61-8AD3-6C15A1382DEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{65C676F4-11AE-4A61-8AD3-6C15A1382DEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{65C676F4-11AE-4A61-8AD3-6C15A1382DEA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED4D98DB-9ACC-42C6-A1AE-08D368A95E5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED4D98DB-9ACC-42C6-A1AE-08D368A95E5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED4D98DB-9ACC-42C6-A1AE-08D368A95E5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED4D98DB-9ACC-42C6-A1AE-08D368A95E5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
