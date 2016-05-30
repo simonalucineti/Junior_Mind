@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{ED4D98DB-9ACC-42C6-A1AE-08D368A95E5B}</ProjectGuid>
+    <ProjectGuid>{C0030A9A-4C56-4629-8401-9D19AC429C06}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Dictionary</RootNamespace>
-    <AssemblyName>Dictionary</AssemblyName>
+    <RootNamespace>DictionaryV2</RootNamespace>
+    <AssemblyName>DictionaryV2</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>
@@ -60,7 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dictionary.cs" />
-    <Compile Include="DictionaryTests.cs" />
+    <Compile Include="DictionaryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

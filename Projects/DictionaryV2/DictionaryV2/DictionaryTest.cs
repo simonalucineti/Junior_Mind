@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Xunit;
 
-namespace Dictionary
+namespace DictionaryV2
 {
-   public  class DictionaryTests
+    public class DictionaryTest
     {
         [Fact]
         public void AddTest1()
         {
-            Dictionary <int, string> input = new Dictionary <int, string>();
+            Dictionary<int, string> input = new Dictionary<int, string>();
             input.Add(1, "aaa");
             input.Add(2, "aab");
             input.Add(3, "aba");
@@ -43,7 +39,7 @@ namespace Dictionary
             input.Add(5, "bba");
             input.Add(6, "bbb");
             input.Clear();
-            Assert.Equal(0,input.Count());
+            Assert.Equal(0, input.Count());
         }
         [Fact]
         public void TryGetValueTest()
